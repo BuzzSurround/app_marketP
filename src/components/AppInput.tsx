@@ -9,22 +9,37 @@ import {
 } from 'react-native';
 import React from 'react';
 import {tws} from '../utility/tailwind';
+import {Colors} from '../constants/Colors';
 
 type Props = {
   style?: StyleProp<ViewStyle>;
   right?: React.ReactNode;
+  marginHorizontal?: number;
 } & TextInputProps;
 
-const $inputStyle =
-  'border-[1px] border-[#F9D3D3] rounded-[8px] flex-row items-center';
+const $inputStyle = 'border-[1px] rounded-[8px] flex-row items-center';
 
-export default function AppInput({style, right, ...props}: Props) {
+export default function AppInput({
+  style,
+  right,
+  keyboardType,
+  marginHorizontal,
+  ...props
+}: Props) {
   return (
-    <View style={[tws($inputStyle), style]}>
+    <View
+      style={[
+        tws($inputStyle),
+        style,
+        styles.container,
+        {marginHorizontal: marginHorizontal},
+      ]}>
       <TextInput
         {...props}
         style={styles.input}
         textAlignVertical={props.multiline ? 'top' : 'center'}
+        placeholderTextColor={Colors.gray}
+        keyboardType={keyboardType}
       />
       {right}
     </View>
@@ -33,11 +48,20 @@ export default function AppInput({style, right, ...props}: Props) {
 
 const styles = StyleSheet.create({
   input: {
-    // width: '100%',
+    // width: 270,
     flex: 1,
+    // marginVertical: 4,
     paddingHorizontal: 12,
     // marginVertical: 2,
-    paddingVertical: 6,
+    paddingVertical: 8,
     fontSize: 14,
+    height: 56,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  container: {
+    marginVertical: 8,
+    // backgroundColor: 'lightblue',
+    borderColor: Colors.gray,
   },
 });
