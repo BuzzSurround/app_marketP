@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import {Icon} from './Icon';
 import AppText from './AppText';
-import Colors from '../utils/colors';
+import {tws} from '../utility/tailwind';
 
 interface ItemSelectorModalProps {
   onClose?: (item: any | null) => void;
@@ -52,7 +52,7 @@ const AppDropdown: React.FC<ItemSelectorModalProps> = ({
           <View style={styles.modalContainer}>
             <AppText style={styles.title}>Select an Item</AppText>
             <TouchableOpacity
-              className="absolute items-end right-3 top-3"
+              style={tws('absolute items-end right-3 top-3')}
               onPress={() => setIsVisible(false)}>
               <Icon type="MaterialIcons" name="close" size={25} />
             </TouchableOpacity>
@@ -62,8 +62,10 @@ const AppDropdown: React.FC<ItemSelectorModalProps> = ({
               showsVerticalScrollIndicator={false}
               renderItem={({item}) => (
                 <TouchableOpacity
-                  className="flex-row justify-between items-center py-2 px-6 border-b border-b-gray-200"
                   style={[
+                    tws(
+                      'flex-row justify-between items-center py-2 px-6 border-b border-b-gray-200',
+                    ),
                     selected &&
                       selected[dataKey] === item[dataKey] &&
                       styles.selectedItem,
@@ -77,16 +79,20 @@ const AppDropdown: React.FC<ItemSelectorModalProps> = ({
           </View>
         </View>
       </Modal>
-      <View className="">
+      <View>
         <TouchableOpacity
-          className={`border-[#f9d4d4] border-[1px] rounded-[8px] py-[12px] px-[12px] flex-row justify-between items-center`}
+          style={tws(
+            `border-[#f9d4d4] border-[1px] rounded-[8px] py-[12px] px-[12px] flex-row justify-between items-center`,
+          )}
           onPress={() => setIsVisible(true)}>
           <AppText
-            className="text-[12px]"
-            style={{color: selected?.[dataKey] ? 'black' : Colors.grey}}>
+            style={{
+              ...tws('text-[12px]'),
+              color: selected?.[dataKey] ? 'black' : 'grey',
+            }}>
             {selected?.[dataKey] || 'Select an Item'}{' '}
             {selected?.[dataKey] && (
-              <AppText color={Colors.grey}>{' ' + postfix}</AppText>
+              <AppText color={'grey'}>{' ' + postfix}</AppText>
             )}
           </AppText>
           <Icon type="MaterialCommunityIcons" name="chevron-down" size={20} />
