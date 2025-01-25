@@ -1,3 +1,4 @@
+import {LocationDetailsFormData} from '../../screens/Register/Location';
 import {RegisterFormData} from '../../screens/Register/Register';
 
 export type loginType = (userData: LoginFormData) => Promise<UserLoginResult>;
@@ -27,6 +28,7 @@ export interface UserData {
 export interface UserLoginResult {
   userID: string;
   token: string;
+  data?: UserData;
   errors?: string;
 }
 
@@ -35,5 +37,5 @@ export type forgotPasswordType = (email: string) => Promise<any>;
 export type resetPasswordType = (password: string) => Promise<any>;
 
 export type registerType = (
-  userData: RegisterFormData,
+  userData: RegisterFormData & LocationDetailsFormData,
 ) => Promise<UserData | undefined>;

@@ -20,6 +20,7 @@ interface ItemSelectorModalProps {
   dataKey: string;
   selected?: any;
   postfix?: string;
+  label?: string;
   onSelectItem?: (item: any) => void;
 }
 
@@ -29,6 +30,7 @@ const AppDropdown: React.FC<ItemSelectorModalProps> = ({
   dataKey,
   selected,
   postfix = '',
+  label,
   onSelectItem = () => {},
 }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -50,7 +52,7 @@ const AppDropdown: React.FC<ItemSelectorModalProps> = ({
         onRequestClose={() => setIsVisible(false)}>
         <View style={styles.modalOverlay}>
           <View style={styles.modalContainer}>
-            <AppText style={styles.title}>Select an Item</AppText>
+            <AppText style={styles.title}>{label || 'Select an Item'}</AppText>
             <TouchableOpacity
               style={tws('absolute items-end right-3 top-3')}
               onPress={() => setIsVisible(false)}>
@@ -79,20 +81,20 @@ const AppDropdown: React.FC<ItemSelectorModalProps> = ({
           </View>
         </View>
       </Modal>
-      <View>
+      <View style={tws('')}>
         <TouchableOpacity
           style={tws(
             `border-[#f9d4d4] border-[1px] rounded-[8px] py-[12px] px-[12px] flex-row justify-between items-center`,
           )}
           onPress={() => setIsVisible(true)}>
           <AppText
-            style={{
-              ...tws('text-[12px]'),
-              color: selected?.[dataKey] ? 'black' : 'grey',
-            }}>
+            style={[
+              tws('text-[14px]'),
+              {color: selected?.[dataKey] ? 'black' : 'gray'},
+            ]}>
             {selected?.[dataKey] || 'Select an Item'}{' '}
             {selected?.[dataKey] && (
-              <AppText color={'grey'}>{' ' + postfix}</AppText>
+              <AppText color={'gray'}>{' ' + postfix}</AppText>
             )}
           </AppText>
           <Icon type="MaterialCommunityIcons" name="chevron-down" size={20} />
@@ -125,7 +127,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   selectedItem: {
-    backgroundColor: '#fa7083',
+    backgroundColor: '#F9EBE0',
   },
 });
 

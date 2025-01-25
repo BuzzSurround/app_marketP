@@ -28,12 +28,7 @@ export default function AppText({
     <Text
       {...props}
       style={[
-        {
-          fontSize: size,
-          fontWeight: bold ? 'bold' : weight,
-          color,
-          fontFamily: 'Muli-Regular',
-        },
+        {fontSize: size, fontWeight: bold ? 'bold' : weight, color},
         props.style,
       ]}>
       {children}

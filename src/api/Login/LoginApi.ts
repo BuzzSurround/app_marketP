@@ -17,7 +17,7 @@ export const getUserData: getUserDataType = async id => {
 };
 
 export const registerUser: registerType = async body => {
-  const result = await ApiCalls.post<UserDataRes>(EndUrls.REGISTER, body);
+  const result = await ApiCalls.post<UserDataRes>(EndUrls.SIGNUP, body);
   if (result?.data) {
     return result?.data;
   } else if (result.errors) {
