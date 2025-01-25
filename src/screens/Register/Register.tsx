@@ -1,4 +1,12 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  ToastAndroid,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import AppText from '../../components/AppText';
 import {$container} from '../../styles/GlobalStyle';
@@ -10,18 +18,18 @@ import {Controller, useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {AuthStackScreenProps} from '../../navigation/AuthNavigator';
 import {useUserStore} from '../../store/userStore';
-import Toast from 'react-native-toast-message';
 import {registerUser} from '../../api/Login/LoginApi';
+import {Colors} from '../../constants/Colors';
 
 type Props = AuthStackScreenProps<'Register'>;
 
 const schema = yup.object().shape({
-  name: yup.string().required('Name is required'),
+  fullName: yup.string().required('Full name is required'),
+  phone_number: yup.string().required('Phone number is required'),
   email: yup
     .string()
     .email('Must be a valid email')
     .required('Email is required'),
-  mobile: yup.string().required('Mobile is required'),
   password: yup
     .string()
     .min(6, 'Password must be at least 6 characters')
@@ -30,6 +38,7 @@ const schema = yup.object().shape({
     .string()
     .required('Confirm password is required')
     .oneOf([yup.ref('password')], 'Passwords must match'),
+  gender: yup.string().required('Gender is required'),
 });
 
 export type RegisterFormData = yup.InferType<typeof schema>;
@@ -42,74 +51,64 @@ export default function Register({navigation}: Props) {
   } = useForm({resolver: yupResolver(schema)});
   const setUserState = useUserStore(state => state.setUserState);
 
-  const onSubmit = async (data: yup.InferType<typeof schema>) => {
-    setUserState({loading: true});
-    try {
-      const result = await registerUser(data);
-      if (result) {
-        Toast.show({
-          text1: 'Registered Successfully! Login with your account',
-        });
-        navigation.navigate('Login');
-      }
-    } catch (err: any) {
-      console.log(err);
-      Toast.show({text1: err.message, type: 'error'});
-    }
-    setUserState({loading: false});
+  const onSubmit = async (data: RegisterFormData) => {
+    navigation.navigate('Location', {registerData: data});
   };
-
   return (
-    <View style={$container}>
-      <View style={tws('px-4 py-8 bg-green-600 rounded-br-3xl')}>
-        <AppText style={tws('text-white text-xl font-bold')}>
-          Create New account
-        </AppText>
-        <AppText style={tws('text-white text-sm')}>
-          Enter your details to get started
-        </AppText>
+    <ScrollView
+      style={$container}
+      contentContainerStyle={tws('pb-[40%]')}
+      showsVerticalScrollIndicator={false}>
+      <View style={tws('px-4 py-8 h-[25%] justify-center items-center')}>
+        <Text
+          style={tws(
+            'text-3xl font-bold text-green-600 border-b border-green-600',
+          )}>
+          BuzzSurround
+        </Text>
       </View>
-      <View style={tws('pt-[20%] px-4')}>
-        <AppText size={16} weight="bold">
-          Register
+      <View style={tws('px-4 gap-1')}>
+        <AppText size={22} weight="bold">
+          Create Account
         </AppText>
+        <AppText size={14}>Sign up to get started</AppText>
       </View>
       <View style={tws('pt-5 px-4')}>
         <Controller
           control={control}
           render={({field: {onChange, onBlur, value}}) => (
             <AppInput
-              placeholder="Enter Name"
+              placeholder="Enter Full Name"
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
             />
           )}
-          name="name"
+          name="fullName"
         />
-        {errors.name && (
+        {errors.fullName && (
           <AppText style={tws('text-red-600 mt-2 ml-2 text-sm')}>
-            {errors.name.message}
+            {errors.fullName.message}
           </AppText>
         )}
         <Controller
           control={control}
           render={({field: {onChange, onBlur, value}}) => (
             <AppInput
-              placeholder="Enter Mobile"
+              placeholder="Enter Mobile Number"
               onBlur={onBlur}
               style={tws('mt-4')}
               keyboardType="number-pad"
-              maxLength={10}
               onChangeText={onChange}
               value={value}
+              maxLength={10}
             />
           )}
-          name="mobile"
+          name="phone_number"
         />
-        {errors.mobile && (
+        {errors.phone_number && (
           <AppText style={tws('text-red-600 mt-2 ml-2 text-sm')}>
-            {errors.mobile.message}
+            {errors.phone_number.message}
           </AppText>
         )}
 
@@ -169,19 +168,54 @@ export default function Register({navigation}: Props) {
             {errors.confirmPassword.message}
           </AppText>
         )}
+        <Controller
+          name="gender"
+          control={control}
+          render={({field: {onChange, onBlur, value}}) => (
+            <View style={tws('flex-row justify-between')}>
+              {['Male', 'Female', 'Other'].map((item, index) => (
+                <AppButton
+                  key={index}
+                  type={value === item ? 'primary' : 'secondary'}
+                  onPress={() => onChange(item)}
+                  label={item}
+                  labelStyle={{
+                    color: value === item ? Colors.white : Colors.gray,
+                  }}
+                  style={[
+                    tws('mt-4 w-[30%] border-gray-400'),
+                    {
+                      backgroundColor:
+                        value === item ? '#938dfc' : Colors.white,
+                    },
+                  ]}
+                />
+              ))}
+            </View>
+          )}
+        />
+        {errors.gender && (
+          <AppText style={tws('text-red-600 mt-2 ml-2 text-sm')}>
+            {errors.gender.message}
+          </AppText>
+        )}
         <AppButton
           onPress={handleSubmit(onSubmit)}
           label="Create new account"
-          style={tws('mt-4')}
+          style={tws('mt-8')}
         />
-        <View style={tws('flex-row items-center mt-4 justify-center')}>
-          <AppText style={tws('text-xs')}>Already have an account?</AppText>
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <AppText style={tws('text-blue-600 ml-1')}>Login</AppText>
-          </TouchableOpacity>
+
+        <View style={tws('mt-6 justify-center')}>
+          <AppText style={tws('self-center')}>Already have an account?</AppText>
+          <AppButton
+            onPress={() => navigation.navigate('Login')}
+            label="Login"
+            type="secondary"
+            style={tws('mt-4')}
+          />
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
