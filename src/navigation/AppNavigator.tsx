@@ -8,11 +8,12 @@ import {NativeStackScreenProps} from 'react-native-screens/lib/typescript/native
 import Home, {groupData} from '../screens/Home/Home';
 import Profile from '../screens/Profile/Profile';
 import {Colors} from '../constants/Colors';
+import {getFocusedRouteNameFromRoute, useRoute} from '@react-navigation/native';
 
 export type TabParamList = {
-  Groups: {group: (typeof groupData)[number]};
-  Friends: undefined;
-  Transactions: undefined;
+  Home: {group: (typeof groupData)[number]};
+  Search: undefined;
+  Notification: undefined;
   Profile: undefined;
 };
 
@@ -31,18 +32,20 @@ export default function AppNavigator() {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="BottomNavigation" component={BottomNavigation} />
-      <Stack.Screen name="GroupDetails" component={''} />
+      <Stack.Screen name="GroupDetails" component={() => {}} />
     </Stack.Navigator>
   );
 }
 
 const BottomNavigation = () => {
+  const route = useRoute();
+  const routeName = getFocusedRouteNameFromRoute(route);
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: tws('py-2 h-55px'),
-        headerShown: true,
-        headerTitle: 'allSettld',
+        headerShown: routeName !== 'Profile' ? true : false,
+        headerTitle: 'BuzzSurround',
         headerTintColor: Colors.primary,
         headerTitleStyle: [
           tws('text-lg font-bold font-serif'),
@@ -53,17 +56,17 @@ const BottomNavigation = () => {
             <TouchableOpacity onPress={() => {}}>
               <AppIcon
                 type="MaterialIcons"
-                name="search"
+                name="near-me"
                 size={30}
-                color={Colors.primary}
+                color={Colors.secondary}
               />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => {}} style={tws('ml-16px')}>
               <AppIcon
                 type="MaterialIcons"
-                name="person-add"
+                name="forum"
                 size={30}
-                color={Colors.primary}
+                color={Colors.secondary}
               />
             </TouchableOpacity>
           </View>
@@ -71,13 +74,13 @@ const BottomNavigation = () => {
         tabBarShowLabel: false,
       }}>
       <Tab.Screen
-        name="Groups"
+        name="Home"
         component={Home}
         options={{
           tabBarIcon: ({focused}) => (
             <AppIcon
-              type="MaterialIcons"
-              name="group"
+              type="MaterialCommunityIcons"
+              name="home-variant"
               size={30}
               color={focused ? Colors.primary : Colors.gray}
             />
@@ -85,13 +88,13 @@ const BottomNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Friends"
-        component={''}
+        name="Search"
+        component={() => {}}
         options={{
           tabBarIcon: ({focused}) => (
             <AppIcon
               type="MaterialIcons"
-              name="person"
+              name="search"
               size={30}
               color={focused ? Colors.primary : Colors.gray}
             />
@@ -99,13 +102,13 @@ const BottomNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Transactions"
-        component={''}
+        name="Notification"
+        component={() => {}}
         options={{
           tabBarIcon: ({focused}) => (
             <AppIcon
               type="MaterialIcons"
-              name="payments"
+              name="notifications"
               size={30}
               color={focused ? Colors.primary : Colors.gray}
             />
