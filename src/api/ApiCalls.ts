@@ -1,5 +1,4 @@
-const BASE_URL = 'http://localhost:8080/api';
-// const BASE_URL = 'https://allsettld.onrender.com/api';
+const BASE_URL = 'http://20.40.51.35:8080/';
 
 const getHeaders = (contentType: string = 'application/json') => {
   const getToken = () => {
