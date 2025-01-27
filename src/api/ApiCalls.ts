@@ -1,13 +1,17 @@
-const BASE_URL = 'http://20.40.51.35:8080/';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const getHeaders = (contentType: string = 'application/json') => {
-  const getToken = () => {
-    return 'Bearer ' + '';
+// const BASE_URL = 'http://localhost:8080/api';
+export const BASE_URL = 'http://20.40.51.35:8080';
+
+const getHeaders = async (contentType: string = 'application/json') => {
+  const getToken = async () => {
+    const token = await AsyncStorage.getItem('token');
+    return 'Bearer ' + token;
   };
 
   return {
     'Content-Type': contentType,
-    Authorization: getToken(),
+    Authorization: await getToken(),
   };
 };
 
@@ -20,8 +24,8 @@ export default class ApiCalls {
     body?: any,
     isFormData: boolean = false,
   ) {
-    return new Promise<T>((resolve, reject) => {
-      const headers = getHeaders(
+    return new Promise<T>(async (resolve, reject) => {
+      const headers = await getHeaders(
         isFormData ? 'multipart/form-data' : 'application/json',
       );
 

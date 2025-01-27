@@ -26,6 +26,7 @@ type Props = AuthStackScreenProps<'Register'>;
 const schema = yup.object().shape({
   fullName: yup.string().required('Full name is required'),
   phone_number: yup.string().required('Phone number is required'),
+  age: yup.number().required('Age is required').min(18).max(100),
   email: yup
     .string()
     .email('Must be a valid email')
@@ -197,6 +198,26 @@ export default function Register({navigation}: Props) {
         {errors.gender && (
           <AppText style={tws('text-red-600 mt-2 ml-2 text-sm')}>
             {errors.gender.message}
+          </AppText>
+        )}
+        <Controller
+          name="age"
+          control={control}
+          render={({field: {onChange, onBlur, value}}) => (
+            <AppInput
+              placeholder="Enter Age"
+              onBlur={onBlur}
+              style={tws('mt-4')}
+              keyboardType="number-pad"
+              maxLength={2}
+              onChangeText={onChange}
+              value={value?.toString()}
+            />
+          )}
+        />
+        {errors.age && (
+          <AppText style={tws('text-red-600 mt-2 ml-2 text-sm')}>
+            {errors.age.message}
           </AppText>
         )}
         <AppButton

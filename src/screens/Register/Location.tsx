@@ -18,7 +18,7 @@ import {Controller, useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {AuthStackScreenProps} from '../../navigation/AuthNavigator';
 import {useUserStore} from '../../store/userStore';
-import {registerUser} from '../../api/Login/LoginApi';
+import {registerUser, sendOtp} from '../../api/Login/LoginApi';
 import {Colors} from '../../constants/Colors';
 
 type Props = AuthStackScreenProps<'Location'>;
@@ -46,7 +46,10 @@ export default function LocationDetails({navigation, route}: Props) {
       const result = await registerUser({...data, ...registerData});
       if (result) {
         ToastAndroid.show('Registration Success', ToastAndroid.SHORT);
-        navigation.navigate('Login');
+        const result = await sendOtp(registerData.email);
+        if (result?.status === 'success') {
+          navigation.navigate('OtpVerification', {email: registerData.email});
+        }
       }
     } catch (err: any) {
       console.log(err);

@@ -24,7 +24,7 @@ export default function AppModal({
     <Modal visible={isVisible} onDismiss={onClose} transparent>
       <View
         style={tws(
-          'w-full h-full items-center bg-[#00000091] rounded-md justify-end',
+          'w-full h-full items-center bg-[#00000091] rounded-lg justify-end',
         )}>
         <View
           style={tws(
