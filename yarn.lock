@@ -3183,13 +3183,15 @@ __metadata:
     react-native-document-picker: ^9.3.1
     react-native-gesture-handler: ^2.20.0
     react-native-loader-kit: ^2.0.8
+    react-native-otp-entry: ^1.8.2
     react-native-safe-area-context: ^4.11.1
     react-native-screens: 3.35.0
     react-native-toast-message: ^2.2.1
     react-native-vector-icons: ^10.2.0
     react-test-renderer: 18.3.1
     reactotron-react-native: ^5.1.9
-    twrnc: ^4.5.1
+    tailwindcss: 3.4.17
+    twrnc: ^4.6.0
     typescript: 5.0.4
     yup: ^1.4.0
     zustand: ^5.0.0
@@ -8404,6 +8406,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-otp-entry@npm:^1.8.2":
+  version: 1.8.2
+  resolution: "react-native-otp-entry@npm:1.8.2"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: f5c1f99a142048efa4c406796aea5d2bec306685f886225316066ec2f96ab6ef145e8c115f876c480e46d6b3ed956899c297d088aeb3e2834f3cdd7293ef5256
+  languageName: node
+  linkType: hard
+
 "react-native-safe-area-context@npm:^4.11.1":
   version: 4.14.1
   resolution: "react-native-safe-area-context@npm:4.14.1"
@@ -9613,7 +9625,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:>=2.0.0":
+"tailwindcss@npm:3.4.17, tailwindcss@npm:>=2.0.0 <4.0.0":
   version: 3.4.17
   resolution: "tailwindcss@npm:3.4.17"
   dependencies:
@@ -9821,14 +9833,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"twrnc@npm:^4.5.1":
-  version: 4.6.0
-  resolution: "twrnc@npm:4.6.0"
+"twrnc@npm:^4.6.0":
+  version: 4.6.1
+  resolution: "twrnc@npm:4.6.1"
   dependencies:
-    tailwindcss: ">=2.0.0"
+    tailwindcss: ">=2.0.0 <4.0.0"
   peerDependencies:
     react-native: ">=0.62.2"
-  checksum: a9bc1e3d8ddf8d73939e401dc3d7d81514624cbf1f08b599faac8d6ebd38af746323f3da5e014001a36ee76fa3feba59720f5c0a6b31cd0c973803fda28d5446
+  checksum: 472895ba11bde1539836bf9cc739b7f7c2ab4954b537f05fa32937270f37aaa1476a2a54a47ad40b4219f7e781f230a03b22e2e7746781bcb370f472d6239936
   languageName: node
   linkType: hard
 
