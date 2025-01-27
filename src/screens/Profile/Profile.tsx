@@ -5,16 +5,16 @@ import AppText from '../../components/AppText';
 import {AppIcon} from '../../components/AppIcon';
 import {Colors} from '../../constants/Colors';
 import {ScrollView} from 'react-native-gesture-handler';
-import {posts, user} from './Contants';
+import {posts, userDetails, userStats} from './Contants';
 
-export default function Profile() {
+export default function Profile({navigation}: any) {
   return (
     <ScrollView style={tws('flex-1 bg-white')}>
       <View>
         <Image
           style={tws('w-full h-36')}
           source={{
-            uri: user?.coverImage,
+            uri: userDetails?.coverImage,
           }}
         />
         <View style={tws(' pl-4 z-999 bg-cyan-200 ')}>
@@ -23,13 +23,15 @@ export default function Profile() {
               'absolute top-[-9] w-full pl-2  flex-row justify-between',
             )}>
             <Image
-              style={tws(' w-18 h-18 bg-red-200 rounded-full items-center')}
+              style={tws(' w-18 h-18 rounded-full items-center')}
               source={{
-                uri: user?.profileImage,
+                uri: userDetails?.profileImage,
               }}
             />
             <TouchableOpacity
-              onPress={() => {}}
+              onPress={() => {
+                navigation.navigate('EditProfile');
+              }}
               style={tws(
                 'justify-center h-8 top-12 right-4 border border-black px-2 rounded-md',
               )}>
@@ -40,22 +42,22 @@ export default function Profile() {
           </View>
           <View style={tws('mt-10')}>
             <AppText size={18} bold>
-              {user?.fullName}
+              {userDetails?.fullName}
             </AppText>
             <AppText size={14} color={Colors.secondary}>
-              {`@${user?.userName}`}
+              {`@${userDetails?.userName}`}
             </AppText>
 
             <AppText size={14} style={tws('mt-2')}>
-              {user?.bio}
+              {userDetails?.bio}
             </AppText>
 
             <AppText color={Colors.secondary} size={14} style={tws('mt-2')}>
-              {`${user?.VdcMunicipality}, ${user?.Province}`}
+              {`${userDetails?.VdcMunicipality}, ${userDetails?.Province}`}
             </AppText>
 
             <AppText size={14} bold style={tws('mt-2')}>
-              {`${user?.followers}`}{' '}
+              {`${userDetails?.followers}`}{' '}
               <AppText size={14} color={Colors.secondary}>
                 {'Followers'}
                 {'   '}
@@ -65,7 +67,7 @@ export default function Profile() {
                 {'   '}
               </AppText>
               <AppText size={14} bold>
-                {user.following}{' '}
+                {userDetails.following}{' '}
               </AppText>
               <AppText size={14} color={Colors.secondary}>
                 {'Following'}
