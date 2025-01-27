@@ -9,14 +9,14 @@ import {
 } from 'react-native';
 import React from 'react';
 import {tws} from '../utility/tailwind';
+import {Colors} from '../constants/Colors';
 
 type Props = {
   style?: StyleProp<ViewStyle>;
   right?: React.ReactNode;
 } & TextInputProps;
 
-const $inputStyle =
-  'border-[1px] border-[#F9D3D3] rounded-[8px] flex-row items-center py-1 px-1';
+const $inputStyle = `border-[1px] border-[${Colors.borderGray}] rounded-[8px] flex-row items-center py-1 px-1`;
 
 export default function AppInput({style, right, ...props}: Props) {
   return (

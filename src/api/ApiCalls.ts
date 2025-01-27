@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // const BASE_URL = 'http://localhost:8080/api';
-export const BASE_URL = 'http://20.40.51.35:8080';
+export const BASE_URL = 'https://buzzsurround.com';
 
 const getHeaders = async (contentType: string = 'application/json') => {
   const getToken = async () => {
@@ -41,6 +41,8 @@ export default class ApiCalls {
           requestOptions.body = JSON.stringify(body);
         }
       }
+
+      console.log('>>>', BASE_URL + url, requestOptions);
 
       fetch(BASE_URL + url, requestOptions)
         .then(res => res.json())

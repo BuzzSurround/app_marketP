@@ -7,8 +7,10 @@ import {tws} from '../utility/tailwind';
 import {NativeStackScreenProps} from 'react-native-screens/lib/typescript/native-stack/types';
 import Home, {groupData} from '../screens/Home/Home';
 import Profile from '../screens/Profile/Profile';
+import EditProfile from '../screens/Profile/EditProfile';
 import {Colors} from '../constants/Colors';
 import {getFocusedRouteNameFromRoute, useRoute} from '@react-navigation/native';
+import AppText from '../components/AppText';
 
 export type TabParamList = {
   Home: {group: (typeof groupData)[number]};
@@ -19,7 +21,9 @@ export type TabParamList = {
 
 export type StackParamList = {
   BottomNavigation: undefined;
-  GroupDetails: undefined;
+  Search: undefined;
+  Notification: undefined;
+  EditProfile: undefined;
 };
 
 export type AppStackParamList<T extends keyof (TabParamList & StackParamList)> =
@@ -30,9 +34,38 @@ const Tab = createBottomTabNavigator<TabParamList>();
 
 export default function AppNavigator() {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
+    <Stack.Navigator
+      screenOptions={{
+        // headerShown:(props) => true,
+        header(props) {
+          return props.route.name == 'EditProfile' ? (
+            <View
+              style={tws(
+                'flex-row items-center justify-between py-3 bg-cyan-100',
+              )}>
+              <View style={tws('ml-4 flex-row items-center')}>
+                <TouchableOpacity onPress={() => props.navigation.goBack()}>
+                  <AppIcon
+                    type="MaterialCommunityIcons"
+                    name="arrow-left"
+                    size={20}
+                  />
+                </TouchableOpacity>
+                <AppText style={tws('ml-6 font-bold')} size={16}>
+                  Edit Profile
+                </AppText>
+              </View>
+              <AppText style={tws('mr-4 font-bold')} size={16}>
+                Save
+              </AppText>
+            </View>
+          ) : null;
+        },
+      }}>
       <Stack.Screen name="BottomNavigation" component={BottomNavigation} />
-      <Stack.Screen name="GroupDetails" component={() => {}} />
+      <Stack.Screen name="Search" component={() => {}} />
+      <Stack.Screen name="Notification" component={() => {}} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
     </Stack.Navigator>
   );
 }
@@ -40,6 +73,7 @@ export default function AppNavigator() {
 const BottomNavigation = () => {
   const route = useRoute();
   const routeName = getFocusedRouteNameFromRoute(route);
+  console.log('>>>routeName', routeName);
   return (
     <Tab.Navigator
       screenOptions={{

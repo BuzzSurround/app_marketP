@@ -3,5 +3,5 @@ export const EndUrls = {
   SIGNUP: '/auth/signup',
   VERIFY_OTP: '/auth/verify-otp',
   SEND_OTP: '/auth/send-otp',
-  GET_USER_DATA: '/user/g/profile',
+  GET_USER_DATA: '/auth/g/profile',
 };
