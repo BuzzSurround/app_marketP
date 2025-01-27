@@ -21,7 +21,7 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {AppIcon} from '../../components/AppIcon';
 import {useUserStore} from '../../store/userStore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {loginUser} from '../../api/Login/LoginApi';
+import {getUserData, loginUser, sendOtp} from '../../api/Login/LoginApi';
 
 interface Props extends AuthStackScreenProps<'Login'> {}
 
@@ -48,12 +48,27 @@ export default function Login({navigation}: Props) {
     setUserState({loading: true});
     try {
       const result = await loginUser(data);
-      if (result.data) {
-        ToastAndroid.show('Login Success', ToastAndroid.SHORT);
-        setUserState({userData: result.data, token: result?.token});
-        AsyncStorage.setItem('token', result?.token);
+      if (result.status === 'success') {
+        AsyncStorage.setItem('token', result?.data?.access_token || '');
+        const userData = await getUserData();
+        if (userData.data) {
+          setUserState({
+            userData: userData.data,
+            token: result?.data?.access_token,
+          });
+          ToastAndroid.show('Login Success', ToastAndroid.SHORT);
+          AsyncStorage.setItem(
+            'refreshToken',
+            result?.data?.refresh_token || '',
+          );
+        }
+      } else if (result.message === 'Account not verified') {
+        const result = await sendOtp(data.email);
+        if (result?.status === 'success') {
+          navigation.navigate('OtpVerification', {email: data.email});
+        }
       } else {
-        ToastAndroid.show(result.errors || '', ToastAndroid.SHORT);
+        ToastAndroid.show(result.message || '', ToastAndroid.SHORT);
       }
     } catch (err: any) {
       console.log(err);
