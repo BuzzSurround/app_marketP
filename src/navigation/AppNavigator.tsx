@@ -5,15 +5,19 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {AppIcon} from '../components/AppIcon';
 import {tws} from '../utility/tailwind';
 import {NativeStackScreenProps} from 'react-native-screens/lib/typescript/native-stack/types';
-import Home, {groupData} from '../screens/Home/Home';
+import Home from '../screens/Home/Home';
 import Profile from '../screens/Profile/Profile';
 import EditProfile from '../screens/Profile/EditProfile';
 import {Colors} from '../constants/Colors';
 import {getFocusedRouteNameFromRoute, useRoute} from '@react-navigation/native';
 import AppText from '../components/AppText';
+import Search from '../screens/Search/Search';
+import Notifications from '../screens/Notifications/Notifications';
+import NewPost from '../screens/NewPost/NewPost';
+import {postData} from '../constants/constants';
 
 export type TabParamList = {
-  Home: {group: (typeof groupData)[number]};
+  Home: {group: (typeof postData)[number]};
   Search: undefined;
   Notification: undefined;
   Profile: undefined;
@@ -24,6 +28,7 @@ export type StackParamList = {
   Search: undefined;
   Notification: undefined;
   EditProfile: undefined;
+  NewPost: undefined;
 };
 
 export type AppStackParamList<T extends keyof (TabParamList & StackParamList)> =
@@ -63,9 +68,10 @@ export default function AppNavigator() {
         },
       }}>
       <Stack.Screen name="BottomNavigation" component={BottomNavigation} />
-      <Stack.Screen name="Search" component={() => {}} />
-      <Stack.Screen name="Notification" component={() => {}} />
+      <Stack.Screen name="Search" component={Search} />
+      <Stack.Screen name="Notification" component={Notifications} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
+      <Stack.Screen name="NewPost" component={NewPost} />
     </Stack.Navigator>
   );
 }
@@ -123,7 +129,7 @@ const BottomNavigation = () => {
       />
       <Tab.Screen
         name="Search"
-        component={() => {}}
+        component={Search}
         options={{
           tabBarIcon: ({focused}) => (
             <AppIcon
@@ -137,7 +143,7 @@ const BottomNavigation = () => {
       />
       <Tab.Screen
         name="Notification"
-        component={() => {}}
+        component={Notifications}
         options={{
           tabBarIcon: ({focused}) => (
             <AppIcon

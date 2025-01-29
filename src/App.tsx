@@ -14,7 +14,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <GestureHandlerRootView>
-        {token ? <AppNavigator /> : <AuthNavigator />}
+        {true ? <AppNavigator /> : <AuthNavigator />}
         <Loader loading={loading} />
       </GestureHandlerRootView>
       <Toast />
