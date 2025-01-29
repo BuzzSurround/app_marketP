@@ -7,4 +7,5 @@ export const Colors = {
     gray: 'gray',
     red: 'red',
     green: 'green',
+    transparent: 'rgba(52, 52, 52, 0.7)'
 }

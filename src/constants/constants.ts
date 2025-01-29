@@ -1,34 +1,9 @@
-export const userDetails = {
-    fullName: 'Deepti Sharma',
-    phone: '9800000001',
-    userName: 'wisechipmunk7507',
-    bio: 'Enthusiastic traveler and food lover exploring the world one bite at a time.',
-    website: 'https://wisechipmunk7507.github.io/',
-    profileImage: 'https://i.pravatar.cc/300?img=32',
-    coverImage: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600',
-    Age: 30,
-    District: 'Bengaluru Urban',
-    Downvotes: 0,
-    Gender: 'Male',
-    Province: 'Karnataka',
-    Upvotes: 0,
-    VdcMunicipality: 'Bengaluru',
-    WardNo: 0,
-    email: 'hehe@example.com',
-    followers: 101,
-    following: 81,
-    noOfPosts: '000',
-};
-
-export const userStats = {
-}
-
-export const posts = [
+export const postData = [
     {
         id: 1,
-        username: 'Deepti Sharma',
+        username: 'Pankaj',
         profileImage:
-            'https://i.pravatar.cc/300?img=32',
+            'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
         postImage:
             'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
         caption: 'Caption 1',
@@ -43,9 +18,9 @@ export const posts = [
     },
     {
         id: 2,
-        username: 'Deepti Sharma',
+        username: 'Alice',
         profileImage:
-            'https://i.pravatar.cc/300?img=32',
+            'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
         // postImage:
         //   'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
         caption: 'Caption 2',
@@ -60,9 +35,9 @@ export const posts = [
     },
     {
         id: 3,
-        username: 'Deepti Sharma',
+        username: 'Bob',
         profileImage:
-            'https://i.pravatar.cc/300?img=32',
+            'https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
         // postImage:
         //   'https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
         caption: 'Caption 3',
@@ -77,9 +52,9 @@ export const posts = [
     },
     {
         id: 4,
-        username: 'Deepti Sharma',
+        username: 'Charlie',
         profileImage:
-            'https://i.pravatar.cc/300?img=32',
+            'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
         postImage:
             'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
         caption: 'Caption 4',
