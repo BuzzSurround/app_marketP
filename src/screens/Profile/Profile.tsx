@@ -8,15 +8,45 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {posts, userDetails, userStats} from './Contants';
 
 export default function Profile({navigation}: any) {
+  const headerIconsContainer = tws(
+    `backdrop-blur border-transparent bg-[${Colors.borderGray}] rounded-full p-[2px]`,
+  );
+
   return (
     <ScrollView style={tws('flex-1 bg-white')}>
-      <View>
+      <View style={tws('flex-1')}>
         <Image
           style={tws('w-full h-36')}
           source={{
             uri: userDetails?.coverImage,
           }}
         />
+        <View style={tws('absolute w-full flex-row justify-between z-999 p-2')}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={headerIconsContainer}>
+            <AppIcon type={'MaterialIcons'} name={'arrow-back'} size={24} />
+          </TouchableOpacity>
+          <View style={tws('flex-row')}>
+            <TouchableOpacity onPress={() => {}} style={headerIconsContainer}>
+              <AppIcon
+                type={'MaterialCommunityIcons'}
+                name={'share'}
+                size={24}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {}}
+              style={[headerIconsContainer, tws('ml-3')]}>
+              <AppIcon type={'MaterialIcons'} name={'search'} size={24} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {}}
+              style={[headerIconsContainer, tws('ml-3')]}>
+              <AppIcon type={'MaterialIcons'} name={'settings'} size={24} />
+            </TouchableOpacity>
+          </View>
+        </View>
         <View style={tws(' pl-4 z-999 bg-cyan-200 ')}>
           <View
             style={tws(
