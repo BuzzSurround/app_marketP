@@ -12,6 +12,7 @@ import AppText from '../../components/AppText';
 import {Colors} from '../../constants/Colors';
 import {AppStackParamList} from '../../navigation/AppNavigator';
 import BuzzItem from '../../components/BuzzItem';
+import {AppIcon} from '../../components/AppIcon';
 
 export const postData = [
   {
@@ -100,6 +101,17 @@ export default function Home({navigation}: Props) {
           />
         </View>
       </View>
+      {/* New Post */}
+      <TouchableOpacity
+        style={[
+          tws(
+            'bg-blue-500 absolute w-10 h-10 rounded-full justify-center items-center bottom-6 right-4',
+          ),
+          {elevation: 4},
+        ]}
+        onPress={() => navigation.navigate('NewPost')}>
+        <AppIcon name="add" type="MaterialIcons" size={24} color="white" />
+      </TouchableOpacity>
     </View>
   );
 }
