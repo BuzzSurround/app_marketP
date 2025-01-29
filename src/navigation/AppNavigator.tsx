@@ -5,7 +5,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {AppIcon} from '../components/AppIcon';
 import {tws} from '../utility/tailwind';
 import {NativeStackScreenProps} from 'react-native-screens/lib/typescript/native-stack/types';
-import Home, {postData} from '../screens/Home/Home';
+import Home from '../screens/Home/Home';
 import Profile from '../screens/Profile/Profile';
 import EditProfile from '../screens/Profile/EditProfile';
 import {Colors} from '../constants/Colors';
@@ -14,6 +14,7 @@ import AppText from '../components/AppText';
 import Search from '../screens/Search/Search';
 import Notifications from '../screens/Notifications/Notifications';
 import NewPost from '../screens/NewPost/NewPost';
+import {postData} from '../constants/constants';
 
 export type TabParamList = {
   Home: {group: (typeof postData)[number]};
