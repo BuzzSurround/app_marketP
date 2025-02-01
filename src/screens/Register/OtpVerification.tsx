@@ -7,7 +7,7 @@ import AppText from '../../components/AppText';
 import {OtpInput} from 'react-native-otp-entry';
 import AppButton from '../../components/AppButton';
 import {useUserStore} from '../../store/userStore';
-import {verifyOtp} from '../../api/Login/LoginApi';
+import {verifyOtp} from '../../api/Auth/LoginApi';
 
 type Props = AuthStackScreenProps<'OtpVerification'>;
 

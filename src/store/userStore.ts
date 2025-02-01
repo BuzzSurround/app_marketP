@@ -1,5 +1,5 @@
-import {create} from 'zustand';
-import {UserData} from '../api/login/types';
+import { create } from 'zustand';
+import { UserData } from '../api/Auth/types';
 
 export type UserState = {
   token: string | null;

@@ -1,5 +1,5 @@
 import ApiCalls from '../ApiCalls';
-import {EndUrls} from '../EndUrls';
+import { EndUrls } from '../EndUrls';
 import {
   RegisterResponse,
   UserDataRes,
@@ -42,9 +42,9 @@ export const registerUser: registerType = async body => {
 };
 
 export const sendOtp: sendOtpType = async email => {
-  return ApiCalls.post<RegisterResponse>(EndUrls.SEND_OTP, {email});
+  return ApiCalls.post<RegisterResponse>(EndUrls.SEND_OTP, { email });
 };
 
 export const verifyOtp: verifyOtpType = async (email, otp) => {
-  return ApiCalls.post<RegisterResponse>(EndUrls.VERIFY_OTP, {email, otp});
+  return ApiCalls.post<RegisterResponse>(EndUrls.VERIFY_OTP, { email, otp });
 };

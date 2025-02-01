@@ -1,5 +1,5 @@
-import {LocationDetailsFormData} from '../../screens/Register/Location';
-import {RegisterFormData} from '../../screens/Register/Register';
+import { LocationDetailsFormData } from '../../screens/Register/Location';
+import { RegisterFormData } from '../../screens/Register/Register';
 
 export type loginType = (userData: LoginFormData) => Promise<RegisterResponse>;
 export type LoginFormData = {
