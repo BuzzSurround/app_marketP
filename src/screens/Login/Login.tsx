@@ -21,7 +21,7 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {AppIcon} from '../../components/AppIcon';
 import {useUserStore} from '../../store/userStore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {getUserData, loginUser, sendOtp} from '../../api/Login/LoginApi';
+import {getUserData, loginUser, sendOtp} from '../../api/Auth/LoginApi';
 
 interface Props extends AuthStackScreenProps<'Login'> {}
 

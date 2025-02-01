@@ -1,10 +1,18 @@
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  Animated,
+  VirtualizedList,
+  FlatList,
+  ScrollView,
+} from 'react-native';
 import React, {useState} from 'react';
 import {tws} from '../../utility/tailwind';
 import AppText from '../../components/AppText';
 import {AppIcon} from '../../components/AppIcon';
 import {Colors} from '../../constants/Colors';
-import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import {posts, userDetails, userStats} from './Contants';
 import BuzzItem from '../../components/BuzzItem';
 
@@ -15,12 +23,13 @@ export default function Profile({navigation}: any) {
     `backdrop-blur border-transparent bg-[${Colors.borderGray}] rounded-full p-[2px]`,
   );
 
+  const handleScroll = (event: Object) => {
+    setScrollPosition(event.nativeEvent.contentOffset.y);
+  };
+
   return (
     <View style={tws(`flex-1 bg-[${Colors.white}]`)}>
-      <ScrollView
-        // onScrollToTop={() => setScrollPosition(0)}
-        stickyHeaderHiddenOnScroll={true}
-        onScrollBeginDrag={() => setScrollPosition(1)}>
+      <ScrollView onScroll={handleScroll} stickyHeaderHiddenOnScroll={true}>
         <View style={tws('')}>
           <View style={tws('w-full h-36 top-[-2] justify-center items-center')}>
             <Image
@@ -103,7 +112,7 @@ export default function Profile({navigation}: any) {
           tws(`absolute top-0 w-full flex-row justify-between p-2`),
           {
             backgroundColor:
-              scrollPosition === 0 ? 'transparent' : Colors.transparent,
+              scrollPosition <= 87 ? 'transparent' : Colors.transparent,
           },
         ]}>
         <TouchableOpacity

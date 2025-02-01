@@ -18,7 +18,7 @@ import {Controller, useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {AuthStackScreenProps} from '../../navigation/AuthNavigator';
 import {useUserStore} from '../../store/userStore';
-import {registerUser, sendOtp} from '../../api/Login/LoginApi';
+import {registerUser, sendOtp} from '../../api/Auth/LoginApi';
 import {Colors} from '../../constants/Colors';
 
 type Props = AuthStackScreenProps<'Location'>;
