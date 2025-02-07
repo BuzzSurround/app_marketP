@@ -96,19 +96,19 @@ const BottomNavigation = () => {
             <TouchableOpacity onPress={() => {}}>
               <AppIcon
                 type="MaterialIcons"
-                name="near-me"
+                name="more-vert"
                 size={30}
                 color={Colors.secondary}
               />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {}} style={tws('ml-16px')}>
+            {/* <TouchableOpacity onPress={() => {}} style={tws('ml-16px')}>
               <AppIcon
                 type="MaterialIcons"
                 name="forum"
                 size={30}
                 color={Colors.secondary}
               />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         ),
         tabBarShowLabel: false,
