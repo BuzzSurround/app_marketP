@@ -1,4 +1,4 @@
-package com.app_marketp
+package com.buzz_surround
 
 import android.app.Application
 import com.facebook.react.PackageList

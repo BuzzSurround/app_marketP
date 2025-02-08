@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "741439639461",
+    "project_id": "buzz-surround",
+    "storage_bucket": "buzz-surround.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:741439639461:android:4fccd350888c9aa3caa24c",
+        "android_client_info": {
+          "package_name": "com.buzz_surround"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDytg9V6wCN0gVNoD_jo34WxruvcD7nNb8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
