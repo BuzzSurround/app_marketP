@@ -1,45 +1,140 @@
-import {View, Text, TouchableOpacity} from 'react-native';
-import React from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  Animated,
+  VirtualizedList,
+  FlatList,
+  ScrollView,
+} from 'react-native';
+import React, {useState} from 'react';
 import {tws} from '../../utility/tailwind';
 import AppText from '../../components/AppText';
 import {AppIcon} from '../../components/AppIcon';
+import {Colors} from '../../constants/Colors';
+import {posts, userDetails, userStats} from './Contants';
+import BuzzItem from '../../components/BuzzItem';
 
-export default function Profile() {
+export default function Profile({navigation}: any) {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  const headerIconsContainer = tws(
+    `backdrop-blur border-transparent bg-[${Colors.borderGray}] rounded-full p-[2px]`,
+  );
+
+  const handleScroll = (event: Object) => {
+    setScrollPosition(event.nativeEvent.contentOffset.y);
+  };
+
   return (
-    <View style={tws('flex-1 bg-white px-4 py-4')}>
-      <AppText size={18} bold>
-        Profile
-      </AppText>
-      <View
-        style={tws(
-          'flex-row gap-4 mt-4 justify-between border-b border-b-gray-200 pt-2 pb-4',
-        )}>
-        <View style={tws('flex-row gap-4')}>
-          <View style={tws('w-12 h-12 bg-red-200 rounded-full items-center')} />
-          <View style={tws('')}>
-            <AppText size={16}>Harsh</AppText>
-            <AppText size={14} color="gray">
-              9876543211
-            </AppText>
+    <View style={tws(`flex-1 bg-[${Colors.white}]`)}>
+      <ScrollView onScroll={handleScroll} stickyHeaderHiddenOnScroll={true}>
+        <View style={tws('')}>
+          <View style={tws('w-full h-36 top-[-2] justify-center items-center')}>
+            <Image
+              style={tws('w-full h-36')}
+              source={{
+                uri: userDetails?.coverImage,
+              }}
+            />
+          </View>
+          <View
+            style={tws(
+              'absolute -bottom-6.5 w-full pl-2 flex-row justify-between',
+            )}>
+            <Image
+              style={tws('w-18 h-18 rounded-full items-center')}
+              source={{
+                uri: userDetails?.profileImage,
+              }}
+            />
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('EditProfile');
+              }}
+              style={tws(
+                'justify-center h-8 top-12 right-4 border border-black px-2 rounded-md',
+              )}>
+              <AppText size={14} bold>
+                {'Edit Profile'}
+              </AppText>
+            </TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity>
-          <AppIcon type="MaterialIcons" name="edit" size={20} color="gray" />
+        <View style={tws('mt-10 ml-2 mr-2')}>
+          <AppText size={18} bold>
+            {userDetails?.fullName}
+          </AppText>
+          <AppText size={14} color={Colors.secondary}>
+            {`@${userDetails?.userName}`}
+          </AppText>
+
+          <AppText size={14} style={tws('mt-2')}>
+            {userDetails?.bio}
+          </AppText>
+
+          <AppText color={Colors.secondary} size={14} style={tws('mt-2')}>
+            {`${userDetails?.VdcMunicipality}, ${userDetails?.Province}`}
+          </AppText>
+
+          <AppText size={14} bold style={tws('mt-2')}>
+            {`${userDetails?.followers}`}{' '}
+            <AppText size={14} color={Colors.secondary}>
+              {'Followers'}
+              {'   '}
+            </AppText>
+            <AppText size={14} bold>
+              {'|'}
+              {'   '}
+            </AppText>
+            <AppText size={14} bold>
+              {userDetails.following}{' '}
+            </AppText>
+            <AppText size={14} color={Colors.secondary}>
+              {'Following'}
+            </AppText>
+          </AppText>
+        </View>
+        <View style={tws('')}>
+          <View style={tws('mt-4')}>
+            <FlatList
+              keyExtractor={(item, index) => `friends-tab-${index}`}
+              data={posts}
+              showsVerticalScrollIndicator={false}
+              renderItem={({item, index}) => <BuzzItem item={item} />}
+            />
+          </View>
+        </View>
+      </ScrollView>
+      <View
+        style={[
+          tws(`absolute top-0 w-full flex-row justify-between p-2`),
+          {
+            backgroundColor:
+              scrollPosition <= 87 ? 'transparent' : Colors.transparent,
+          },
+        ]}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={headerIconsContainer}>
+          <AppIcon type={'MaterialIcons'} name={'arrow-back'} size={24} />
         </TouchableOpacity>
-      </View>
-      <View>
-        <TouchableOpacity style={tws('flex-row items-center gap-4 py-4 px-2')}>
-          <AppIcon type="MaterialIcons" name="qr-code-scanner" size={30} />
-          <AppText size={14}>Scan Code</AppText>
-        </TouchableOpacity>
-        <TouchableOpacity style={tws('flex-row items-center gap-4 py-3 px-2')}>
-          <AppIcon type="MaterialIcons" name="report" size={30} />
-          <AppText size={14}>Contact US</AppText>
-        </TouchableOpacity>
-        <TouchableOpacity style={tws('flex-row items-center gap-4 py-3 px-2')}>
-          <AppIcon type="MaterialIcons" name="star" size={30} />
-          <AppText size={14}>Rate Us</AppText>
-        </TouchableOpacity>
+        <View style={tws('flex-row')}>
+          <TouchableOpacity onPress={() => {}} style={headerIconsContainer}>
+            <AppIcon type={'MaterialCommunityIcons'} name={'share'} size={24} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {}}
+            style={[headerIconsContainer, tws('ml-3')]}>
+            <AppIcon type={'MaterialIcons'} name={'search'} size={24} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {}}
+            style={[headerIconsContainer, tws('ml-3')]}>
+            <AppIcon type={'MaterialIcons'} name={'settings'} size={24} />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

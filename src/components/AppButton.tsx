@@ -2,6 +2,7 @@ import {
   StyleProp,
   StyleSheet,
   Text,
+  TextStyle,
   TouchableOpacity,
   View,
   ViewStyle,
@@ -9,24 +10,29 @@ import {
 import React from 'react';
 import AppText from './AppText';
 import {tws} from '../utility/tailwind';
+import {Colors} from '../constants/Colors';
 
 type Props = {
   label?: string;
   type?: 'primary' | 'secondary';
   style?: StyleProp<ViewStyle>;
+  labelStyle?: StyleProp<TextStyle>;
   onPress?: () => void;
 };
 
-const $buttonStyle = tws('bg-[#db3f3f] rounded-[8px] py-2.5 items-center');
+const $buttonStyle = tws(
+  `bg-[${Colors.primary}] rounded-[8px] py-3 items-center`,
+);
 
 const $secondaryButtonStyle = tws(
-  'bg-[#2fb15d] rounded-[8px] py-2.5 items-center',
+  'border border-blue-400 rounded-[8px] py-3 items-center',
 );
 
 export default function AppButton({
   style,
   label,
   type = 'primary',
+  labelStyle,
   onPress,
 }: Props) {
   if (type === 'secondary') {
@@ -34,13 +40,18 @@ export default function AppButton({
       <TouchableOpacity
         style={[$secondaryButtonStyle, style]}
         onPress={onPress}>
-        <AppText style={tws('text-white font-bold')}>{label}</AppText>
+        <AppText
+          style={[tws('text-blue-400 text-[14px] font-bold'), labelStyle]}>
+          {label}
+        </AppText>
       </TouchableOpacity>
     );
   }
   return (
     <TouchableOpacity style={[$buttonStyle, style]} onPress={onPress}>
-      <AppText style={tws('text-white font-bold')}>{label}</AppText>
+      <AppText style={[tws('text-white text-[14px]'), labelStyle]}>
+        {label}
+      </AppText>
     </TouchableOpacity>
   );
 }

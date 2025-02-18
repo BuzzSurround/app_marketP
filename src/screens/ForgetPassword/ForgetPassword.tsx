@@ -31,13 +31,13 @@ export default function ForgetPassword({navigation}: Props) {
   const onSubmit = (data: any) => console.log(data);
   return (
     <View style={$container}>
-      <View style={tws('px-4 py-8 bg-green-600 rounded-br-3xl')}>
-        <AppText style={tws('text-white text-xl font-bold')}>
-          Forget Password
-        </AppText>
-        <AppText style={tws('text-white text-md')}>
-          Enter your email to reset your password
-        </AppText>
+      <View style={tws('px-4 py-8 h-[25%] justify-center items-center')}>
+        <Text
+          style={tws(
+            'text-3xl font-bold text-green-600 border-b border-green-600',
+          )}>
+          BuzzSurround
+        </Text>
       </View>
       <View style={tws('pt-[20%] px-4')}>
         <AppText size={14} weight="bold">
