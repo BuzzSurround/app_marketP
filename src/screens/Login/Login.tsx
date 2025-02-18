@@ -22,6 +22,7 @@ import {AppIcon} from '../../components/AppIcon';
 import {useUserStore} from '../../store/userStore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {getUserData, loginUser, sendOtp} from '../../api/Auth/LoginApi';
+import {Colors} from '../../constants/Colors';
 
 interface Props extends AuthStackScreenProps<'Login'> {}
 
@@ -110,16 +111,13 @@ export default function Login({navigation}: Props) {
   };
   return (
     <ScrollView style={$container}>
-      <View style={tws('px-4 py-8 h-[25%] justify-center items-center')}>
-        <Text
-          style={tws(
-            'text-3xl font-bold text-green-600 border-b border-green-600',
-          )}>
+      <View style={tws('mx-4 my-8 h-[25%] justify-center items-center')}>
+        <AppText size={30} weight="bold" color={Colors.primary}>
           BuzzSurround
-        </Text>
+        </AppText>
       </View>
       <StatusBar backgroundColor={'#fff'} barStyle="dark-content" />
-      <View style={tws('px-4 gap-1')}>
+      <View style={tws('px-4  gap-1')}>
         <AppText size={22} weight="bold">
           Welcome Back!
         </AppText>

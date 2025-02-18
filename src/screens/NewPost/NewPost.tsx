@@ -14,6 +14,7 @@ import {tws} from '../../utility/tailwind';
 import AppButton from '../../components/AppButton';
 import {screenHeight} from '../../utility/constants';
 import {AppStackParamList} from '../../navigation/AppNavigator';
+import {Colors} from '../../constants/Colors';
 
 type Props = AppStackParamList<'NewPost'>;
 
@@ -34,7 +35,8 @@ export default function NewPost({navigation}: Props) {
           <AppButton
             type="secondary"
             label="Post"
-            style={tws('py-1 my-2 px-4')}
+            style={tws(`py-1 my-2 px-4 border-[${Colors.primary}]`)}
+            labelStyle={tws(`text-[${Colors.primary}]`)}
           />
         </View>
       </View>
@@ -63,7 +65,7 @@ export default function NewPost({navigation}: Props) {
               type="MaterialIcons"
               name="add-photo-alternate"
               size={26}
-              color="blue"
+              color={Colors.primary}
             />
           </TouchableOpacity>
           <TouchableOpacity style={tws('')}>
@@ -71,7 +73,7 @@ export default function NewPost({navigation}: Props) {
               type="MaterialIcons"
               name="location-on"
               size={26}
-              color="blue"
+              color={Colors.primary}
             />
           </TouchableOpacity>
         </View>

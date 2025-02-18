@@ -15,6 +15,7 @@ import Search from '../screens/Search/Search';
 import Notifications from '../screens/Notifications/Notifications';
 import NewPost from '../screens/NewPost/NewPost';
 import {postData} from '../constants/constants';
+import Settings from '../screens/Profile/Settings';
 
 export type TabParamList = {
   Home: {group: (typeof postData)[number]};
@@ -29,6 +30,7 @@ export type StackParamList = {
   Notification: undefined;
   EditProfile: undefined;
   NewPost: undefined;
+  Settings: undefined;
 };
 
 export type AppStackParamList<T extends keyof (TabParamList & StackParamList)> =
@@ -43,7 +45,8 @@ export default function AppNavigator() {
       screenOptions={{
         // headerShown:(props) => true,
         header(props) {
-          return props.route.name == 'EditProfile' ? (
+          return props.route.name == 'EditProfile' ||
+            props.route.name == 'Settings' ? (
             <View
               style={tws(
                 'flex-row items-center justify-between py-3 bg-cyan-100',
@@ -57,12 +60,18 @@ export default function AppNavigator() {
                   />
                 </TouchableOpacity>
                 <AppText style={tws('ml-6 font-bold')} size={16}>
-                  Edit Profile
+                  {props.route.name == 'EditProfile'
+                    ? ' Edit Profile'
+                    : props.route.name == 'Settings'
+                    ? 'Settings'
+                    : null}
                 </AppText>
               </View>
-              <AppText style={tws('mr-4 font-bold')} size={16}>
-                Save
-              </AppText>
+              {props.route.name == 'EditProfile' && (
+                <AppText style={tws('mr-4 font-bold')} size={16}>
+                  Save
+                </AppText>
+              )}
             </View>
           ) : null;
         },
@@ -72,6 +81,7 @@ export default function AppNavigator() {
       <Stack.Screen name="Notification" component={Notifications} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
       <Stack.Screen name="NewPost" component={NewPost} />
+      <Stack.Screen name="Settings" component={Settings} />
     </Stack.Navigator>
   );
 }

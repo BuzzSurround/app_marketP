@@ -112,7 +112,7 @@ export default function Profile({navigation}: any) {
           tws(`absolute top-0 w-full flex-row justify-between p-2`),
           {
             backgroundColor:
-              scrollPosition <= 87 ? 'transparent' : Colors.transparent,
+              scrollPosition <= 87 ? 'transparent' : Colors.white,
           },
         ]}>
         <TouchableOpacity
@@ -130,7 +130,9 @@ export default function Profile({navigation}: any) {
             <AppIcon type={'MaterialIcons'} name={'search'} size={24} />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => {}}
+            onPress={() => {
+              navigation.navigate('Settings');
+            }}
             style={[headerIconsContainer, tws('ml-3')]}>
             <AppIcon type={'MaterialIcons'} name={'settings'} size={24} />
           </TouchableOpacity>

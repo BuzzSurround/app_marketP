@@ -61,12 +61,9 @@ export default function Register({navigation}: Props) {
       contentContainerStyle={tws('pb-[40%]')}
       showsVerticalScrollIndicator={false}>
       <View style={tws('px-4 py-8 h-[25%] justify-center items-center')}>
-        <Text
-          style={tws(
-            'text-3xl font-bold text-green-600 border-b border-green-600',
-          )}>
+        <AppText size={30} weight="bold" color={Colors.primary}>
           BuzzSurround
-        </Text>
+        </AppText>
       </View>
       <View style={tws('px-4 gap-1')}>
         <AppText size={22} weight="bold">
@@ -187,7 +184,7 @@ export default function Register({navigation}: Props) {
                     tws('mt-4 w-[30%] border-gray-400'),
                     {
                       backgroundColor:
-                        value === item ? '#938dfc' : Colors.white,
+                        value === item ? Colors.primary : Colors.white,
                     },
                   ]}
                 />
